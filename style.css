@@ -1,0 +1,52 @@
+html {
+    height: 100vh;
+}
+
+body {
+    background-color: #012030;
+    color: white;
+    font-family: serif;
+}
+
+h1 {
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+
+a, a:link, a:hover, a:visited{
+    color: inherit;
+}
+
+.contents {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+    padding: 10px;
+}
+
+.trim {
+    position: relative;
+}
+.trim img{
+    width: 250px;
+    border-radius: 50%;
+    filter: drop-shadow(3px 3px 3px #222222);
+}
+
+.profile {
+    padding-top: 0px;
+}
+
+.social-links {
+    font-size: 3em;
+}
+
+.social-links p {
+    margin: 0;
+}
+
+.social-links i {
+    margin: 5px;
+}
