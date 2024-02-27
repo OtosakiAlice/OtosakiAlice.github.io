@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Excel Column Converter</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .container {
+    max-width: 600px;
+    width: 100%;
+  }
+  label, input, button {
+    width: 100%;
+    margin: 5px 0;
+  }
+  input, button {
+    padding: 10px;
+  }
+  button {
+    cursor: pointer;
+  }
+  @media (max-width: 600px) {
+    .container {
+      padding: 0 20px;
+    }
+  }
+</style>
+</head>
+<body>
+<h2>Excel Column Converter</h2>
+
+<div class="container">
+  <div>
+    <label for="columnNumber">Enter Column Number:</label>
+    <input type="number" id="columnNumber" min="1">
+    <button onclick="convertToLetter()">Convert to Letter</button>
+    <p id="resultLetter"></p>
+  </div>
+
+  <div>
+    <label for="columnName">Enter Column Name:</label>
+    <input type="text" id="columnName" maxlength="3">
+    <button onclick="convertToColumn()">Convert to Number</button>
+    <p id="resultNumber"></p>
+  </div>
+</div>
+
+<script>
+function columnToLetter(column) {
+  let letter = '';
+  let temp;
+  while (column > 0) {
+    temp = (column - 1) % 26;
+    letter = String.fromCharCode(temp + 65) + letter;
+    column = (column - temp - 1) / 26;
+  }
+  return letter;
+}
+
+function letterToColumn(letter) {
+  let column = 0;
+  let length = letter.length;
+  for (let i = 0; i < length; i++) {
+    column += (letter.charCodeAt(i) - 64) * Math.pow(26, length - i - 1);
+  }
+  return column;
+}
+</script>
+</body>
+</html>
