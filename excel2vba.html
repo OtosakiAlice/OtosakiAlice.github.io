@@ -3,53 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <title>Excel Column Converter</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .container {
-    max-width: 600px;
-    width: 100%;
-  }
-  label, input, button {
-    width: 100%;
-    margin: 5px 0;
-  }
-  input, button {
-    padding: 10px;
-  }
-  button {
-    cursor: pointer;
-  }
-  @media (max-width: 600px) {
-    .container {
-      padding: 0 20px;
-    }
-  }
-</style>
 </head>
 <body>
-<h2>Excel Column Converter</h2>
 
-<div class="container">
-  <div>
-    <label for="columnNumber">Enter Column Number:</label>
-    <input type="number" id="columnNumber" min="1">
-    <button onclick="convertToLetter()">Convert to Letter</button>
-    <p id="resultLetter"></p>
-  </div>
+<div class="container mt-5">
+  <h2 class="mb-4">Excel Column Converter</h2>
 
-  <div>
-    <label for="columnName">Enter Column Name:</label>
-    <input type="text" id="columnName" maxlength="3">
-    <button onclick="convertToColumn()">Convert to Number</button>
-    <p id="resultNumber"></p>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <div class="form-group">
+        <label for="columnNumber">Enter Column Number:</label>
+        <input type="number" id="columnNumber" class="form-control" min="1">
+      </div>
+      <button onclick="convertToLetter()" class="btn btn-primary">Convert to Letter</button>
+      <p id="resultLetter" class="mt-2"></p>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="columnName">Enter Column Name:</label>
+        <input type="text" id="columnName" class="form-control" maxlength="3">
+      </div>
+      <button onclick="convertToColumn()" class="btn btn-primary">Convert to Number</button>
+      <p id="resultNumber" class="mt-2"></p>
+    </div>
   </div>
 </div>
 
@@ -62,7 +41,7 @@ function columnToLetter(column) {
     letter = String.fromCharCode(temp + 65) + letter;
     column = (column - temp - 1) / 26;
   }
-  return letter;
+  document.getElementById('resultLetter').innerText = letter;
 }
 
 function letterToColumn(letter) {
@@ -71,8 +50,30 @@ function letterToColumn(letter) {
   for (let i = 0; i < length; i++) {
     column += (letter.charCodeAt(i) - 64) * Math.pow(26, length - i - 1);
   }
-  return column;
+  document.getElementById('resultNumber').innerText = column;
+}
+
+function convertToLetter() {
+  const columnNumber = parseInt(document.getElementById('columnNumber').value, 10);
+  if (!isNaN(columnNumber)) {
+    columnToLetter(columnNumber);
+  } else {
+    document.getElementById('resultLetter').innerText = 'Invalid input';
+  }
+}
+
+function convertToColumn() {
+  const columnName = document.getElementById('columnName').value.toUpperCase();
+  if (columnName.match(/^[A-Z]+$/)) {
+    letterToColumn(columnName);
+  } else {
+    document.getElementById('resultNumber').innerText = 'Invalid input';
+  }
 }
 </script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
